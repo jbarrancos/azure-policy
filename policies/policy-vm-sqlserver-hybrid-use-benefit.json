@@ -1,0 +1,47 @@
+{
+    "type": "Microsoft.Authorization/policyDefinitions",
+    "name": "control-hybrid-use-benefit-sql-server",
+    "properties": {
+        "displayName": "Control SQL Server VM Licenses",
+        "description": "This policy will controls SQL Server VM Licenses.",
+        "parameters": {
+            "allowedSQLServerLicenses": {
+                "type": "Array",
+                "metadata": {
+                    "description": "Allowed SQL Server Licences like ex: [\"AHUB\",\"DR\"] or [\"PAYG\"]",
+                    "displayName": "Allowed SQL License types"
+                }
+            },
+            "effect": {
+                "type": "string",
+                "defaultValue": "Deny",
+                "allowedValues": [
+                    "Audit",
+                    "Deny",
+                    "Disabled"
+                ],
+                "metadata": {
+                    "displayName": "Effect",
+                    "description": "The effect determines what happens when the policy rule is evaluated to match"
+                }
+            }
+        },
+        "policyRule": {
+            "if": {
+                "allOf": [
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.SqlVirtualMachine/SqlVirtualMachines"
+                    },
+                    {
+                        "field": "Microsoft.SqlVirtualMachine/SqlVirtualMachines/SqlServerLicenseType",
+                        "in": "[parameters('allowedSQLServerLicenses')]"
+                    }
+                ]
+            },
+            "then": {
+                "effect": "[parameters('effect')]"
+            }
+        }
+    }
+}

@@ -1,0 +1,62 @@
+{
+    "type": "Microsoft.Authorization/policyDefinitions",
+    "name": "control-hybrid-use-benefit-windows",
+    "properties": {
+        "displayName": "Control Windows Hybrid Use Benifit",
+        "description": "This policy will control usage of Windows Licenses (Hybrid Use)",
+        "parameters": {
+            "allowedWindowsLicenses": {
+                "type": "Array",
+                "metadata": {
+                    "description": "Allowed Hybrid Use: [\"Windows_Client\",\"Windows_Server\"] or [\"\"]",
+                    "displayName": "Allowed Hybrid Use"
+                }
+            },
+            "effect": {
+                "type": "string",
+                "defaultValue": "Deny",
+                "allowedValues": [
+                    "Audit",
+                    "Deny",
+                    "Disabled"
+                ],
+                "metadata": {
+                    "displayName": "Effect",
+                    "description": "The effect determines what happens when the policy rule is evaluated to match"
+                }
+            }
+        },
+        "policyRule": {
+            "if": {
+                "allOf": [
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.Compute/virtualMachines"
+                    },
+                    {
+                        "anyOf": [
+                            {
+                                "field": "Microsoft.Compute/imagePublisher",
+                                "in": [
+                                    "MicrosoftWindowsServer",
+                                    "MicrosoftWindowsClient"
+                                ]
+                            },
+                            {
+                                "field": "Microsoft.Compute/virtualMachines/storageProfile.osDisk.osType",
+                                "equals": "Windows"
+                            }
+                        ]
+                    },
+                    {
+                        "field": "Microsoft.Compute/licenseType",
+                        "in": "[parameters('allowedWindowsLicenses')]"
+                    }
+                ]
+            },
+            "then": {
+                "effect": "[parameters('effect')]"
+            }
+        }
+    }
+}
