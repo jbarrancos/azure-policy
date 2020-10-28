@@ -1,0 +1,31 @@
+{
+ "properties": {
+  "displayName": "custom-validate-budget-existence",
+  "policyType": "Custom",
+  "mode": "All",
+  "parameters": {},
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.Resources/subscriptions"
+     }
+    ]
+   },
+   "then": {
+    "effect": "audit",
+    "details": {
+     "type": "Microsoft.Consumption/budgets",
+     "existenceCondition": {
+      "field": "type",
+      "equals": "Microsoft.Consumption/budgets"
+     }
+    }
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Management/managementGroups/a09ccd5a-9da8-4f7d-92f6-4b95444d77b7/providers/Microsoft.Authorization/policyDefinitions/86531e72-508c-414a-b618-eb58f6a07c3e",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "custom-validate-budget-existence"
+}
