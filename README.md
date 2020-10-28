@@ -1,6 +1,6 @@
 # azure-policy
 
-## policy 
+## policies/
 Collection of Azure Policies
 
 ## force-check-policy.ps1
