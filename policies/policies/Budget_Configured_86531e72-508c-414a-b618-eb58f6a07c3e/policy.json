@@ -1,0 +1,37 @@
+{
+ "properties": {
+  "displayName": "Budget Configured",
+  "policyType": "Custom",
+  "mode": "All",
+  "metadata": {
+   "createdBy": "820c76b9-a78e-4289-8464-326980f2c257",
+   "createdOn": "2020-10-28T13:16:32.9676726Z",
+   "updatedBy": null,
+   "updatedOn": null
+  },
+  "parameters": {},
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.Resources/subscriptions"
+     }
+    ]
+   },
+   "then": {
+    "effect": "audit",
+    "details": {
+     "type": "Microsoft.Consumption/budgets",
+     "existenceCondition": {
+      "field": "type",
+      "equals": "Microsoft.Consumption/budgets"
+     }
+    }
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Management/managementGroups/a09ccd5a-9da8-4f7d-92f6-4b95444d77b7/providers/Microsoft.Authorization/policyDefinitions/86531e72-508c-414a-b618-eb58f6a07c3e",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "86531e72-508c-414a-b618-eb58f6a07c3e"
+}
