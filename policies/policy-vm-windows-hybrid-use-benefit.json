@@ -2,7 +2,7 @@
     "type": "Microsoft.Authorization/policyDefinitions",
     "name": "force-hybrid-use-benefit-windows",
     "properties": {
-        "displayName": "Force Windows Hybrid Use Benifit",
+        "displayName": "Windows Server/Client needs to use Hybrid Use Benifit",
         "description": "This policy will force usage of Windows Licenses (Hybrid Use)",
         "parameters": {
              "effect": {
