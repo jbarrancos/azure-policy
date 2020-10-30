@@ -1,9 +1,9 @@
 {
     "type": "Microsoft.Authorization/policyDefinitions",
-    "name": "control-hybrid-use-benefit-windows",
+    "name": "force-hybrid-use-benefit-windows",
     "properties": {
-        "displayName": "Control Windows Hybrid Use Benifit",
-        "description": "This policy will control usage of Windows Licenses (Hybrid Use)",
+        "displayName": "Force Windows Hybrid Use Benifit",
+        "description": "This policy will force usage of Windows Licenses (Hybrid Use)",
         "parameters": {
             "allowedWindowsLicenses": {
                 "type": "Array",
