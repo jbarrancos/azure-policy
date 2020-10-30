@@ -5,14 +5,7 @@
         "displayName": "Force Windows Hybrid Use Benifit",
         "description": "This policy will force usage of Windows Licenses (Hybrid Use)",
         "parameters": {
-            "allowedWindowsLicenses": {
-                "type": "Array",
-                "metadata": {
-                    "description": "Allowed Hybrid Use: [\"Windows_Client\",\"Windows_Server\"] or [\"\"]",
-                    "displayName": "Allowed Hybrid Use"
-                }
-            },
-            "effect": {
+             "effect": {
                 "type": "string",
                 "defaultValue": "Deny",
                 "allowedValues": [
