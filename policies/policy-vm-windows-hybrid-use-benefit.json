@@ -50,7 +50,7 @@
                     },
                     {
                         "field": "Microsoft.Compute/licenseType",
-                        "in": "[parameters('allowedWindowsLicenses')]"
+                        "notIn": "[parameters('allowedWindowsLicenses')]"
                     }
                 ]
             },
