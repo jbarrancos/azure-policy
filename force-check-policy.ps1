@@ -1,7 +1,7 @@
 # Force of policy refresh cycle
 
 Write-Output "Initiate policy refresh cycle for current Subscription"
-$subscriptionId = Get-AzSubscription | Select-Object -ExpandProperty id
+$subscriptionId = Get-AzContext | Select-Object -ExpandProperty SubscriptionId
 $uri = "https://management.azure.com/subscriptions/$subscriptionId/providers/Microsoft.PolicyInsights/policyStates/latest/triggerEvaluation?api-version=2018-07-01-preview"
 $azContext = Get-AzContext
 $azProfile = [Microsoft.Azure.Commands.Common.Authentication.Abstractions.AzureRmProfileProvider]::Instance.Profile
