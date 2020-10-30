@@ -50,7 +50,10 @@
                     },
                     {
                         "field": "Microsoft.Compute/licenseType",
-                        "notIn": "[parameters('allowedWindowsLicenses')]"
+                        "notIn":  [ 
+                            "Windows_Client", 
+                            "Windows_Server" 
+                        ]
                     }
                 ]
             },
