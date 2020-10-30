@@ -6,4 +6,4 @@
 
 **policy-vm-sqlserver-hybrid-use-benefit.json**: Control which SQL Server license types are allowed (Hybrid Use Benefit). __Not yet validated__
 
-**policy-vm-windows-hybrid-use-benefit.json**: Control for which windows server / client license type is allowed (Hybrid Use Benefit).  __Not yet validated__
+**policy-vm-windows-hybrid-use-benefit.json**: Force windows server / client Hybrid Use Benefit.
