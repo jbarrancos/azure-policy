@@ -1,0 +1,61 @@
+{
+    "type": "Microsoft.Authorization/policyDefinitions",
+    "name": "modify-hybrid-use-benefit-windows-server",
+    "properties": {
+        "displayName": "Modify Windows Server Hybrid Use Benefit",
+        "description": "This policy will set default usage of Windows Licenses (Hybrid Use)",
+        "parameters": {
+             "licenseType": {
+                "type": "string",
+                "defaultValue": "Deny",
+                "allowedValues": [
+                    "",
+                    "MicrosoftWindowsServer"
+                ],
+                "metadata": {
+                    "displayName": "license",
+                    "description": "Empty or MicrosoftWindowsServer"
+                }
+            }
+        },
+        "policyRule": {
+            "if": {
+                "allOf": [
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.Compute/virtualMachines"
+                    },
+                    {
+                        "anyOf": [
+                            {
+                                "field": "Microsoft.Compute/imagePublisher",
+                                "in": [
+                                    "MicrosoftWindowsServer"
+                                ]
+                            },
+                            {
+                                "field": "Microsoft.Compute/virtualMachines/storageProfile.osDisk.osType",
+                                "equals": "Windows"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "then": {
+                "effect": "modify",
+                "details": {
+                  "roleDefinitionIds": [
+                    "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+                  ],
+                  "operations": [
+                    {
+                      "operation": "addOrReplace",
+                      "field": "Microsoft.Compute/virtualMachines/licenseType",
+                      "value": "[parameters('licenseType')]"
+                    }
+                  ]
+                }
+            }
+        }
+    }
+}
