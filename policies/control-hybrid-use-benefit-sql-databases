@@ -31,23 +31,83 @@
                 }
             }
         },
+       "parameters": {
+            "allowedSQLDatabaseLicense": {
+                "type": "string",
+                "defaultValue": "BasePrice",
+                "allowedValues": [
+                   "LicenseIncluded",
+                   "BasePrice"
+                ],
+                "metadata": {
+                    "description": "SQL Database license included or baseprice (hybrid use)",
+                    "displayName": "Audit license type"
+                }
+            },
+            "effect": {
+                "type": "string",
+                "defaultValue": "Deny",
+                "allowedValues": [
+                    "Audit",
+                    "Deny",
+                    "Disabled"
+                ],
+                "metadata": {
+                    "displayName": "Effect",
+                    "description": "The effect determines what happens when the policy rule is evaluated to match"
+                }
+            }
+        },
         "policyRule": {
             "if": {
+               "anyOf": [
+                 {
+                  "allOf": [
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.Sql/servers/databases"
+                    },
+                    {
+                        "field": "Microsoft.Sql/servers/databases/licenseType",
+                        "notEquals": "[parameters('allowedSQLDatabaseLicense')]"
+                    }
+                  ]
+                 },
+                 {
                 "allOf": [
                     {
                         "field": "type",
-                        "In": [ 
-                          "Microsoft.Sql/servers/databases",
-                          "Microsoft.Sql/servers/elasticpools",
-                          "Microsoft.Sql/instancePools",
-                          "Microsoft.Sql/managedInstances"
-                        ]
+                        "equals": "Microsoft.Sql/servers/elasticpools"
                     },
                     {
-                        "field": "Microsoft.SqlVirtualMachine/SqlVirtualMachines/SqlServerLicenseType",
+                        "field": "Microsoft.Sql/servers/elasticpools/licenseType",
                         "notEquals": "[parameters('allowedSQLDatabaseLicense')]"
                     }
                 ]
+                 },{
+                "allOf": [
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.Sql/instancePools"
+                    },
+                    {
+                        "field": "Microsoft.Sql/instancePools/licenseType",
+                        "notEquals": "[parameters('allowedSQLDatabaseLicense')]"
+                    }
+                ]
+                 },{
+                "allOf": [
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.Sql/managedInstances"
+                    },
+                    {
+                        "field": "Microsoft.Sql/managedInstances/licenseType",
+                        "notEquals": "[parameters('allowedSQLDatabaseLicense')]"
+                    }
+                ]
+              }
+               ]
             },
             "then": {
                 "effect": "[parameters('effect')]"
