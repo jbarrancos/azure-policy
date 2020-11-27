@@ -2,7 +2,7 @@
     "type": "Microsoft.Authorization/policyDefinitions",
     "name": "control-hybrid-use-benefit-sql-server",
     "properties": {
-        "displayName": "Control SQL Server VM Licenses",
+        "displayName": "Control SQL Server VM License Type",
         "description": "This policy will controls SQL Server VM Licenses.",
         "parameters": {
             "allowedSQLServerLicenses": {
