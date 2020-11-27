@@ -72,17 +72,16 @@
                         "notEquals": "[parameters('allowedSQLDatabaseLicense')]"
                     },
                     {
-                        "field": "Microsoft.Sql/servers/databases/sku.name",
-                        "notin": [
-                            "GP_S_Gen5",
-                            "Stretch",
-                            "DataWarehouse",
-                            "Premium",
-                            "Standard",
-                            "Free",
-                            "Basic",
-                            "System"
+                        "field": "Microsoft.Sql/servers/databases/sku.tier",
+                        "in": [
+                            "GeneralPurpose",
+                            "BusinessCritical",
+                            "Hyperscale"
                         ]
+                    },
+                    {
+                        "field": "Microsoft.Sql/servers/databases/sku.name",
+                        "notlike": "GP_S_*"
                     }
                   ]
                  },
