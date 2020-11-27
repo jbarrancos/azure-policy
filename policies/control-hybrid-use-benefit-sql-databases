@@ -73,11 +73,15 @@
                     },
                     {
                         "field": "Microsoft.Sql/servers/databases/sku.name",
-                        "in": [
-                            "GP_Gen5_2",
-                            "BC_Gen5_2",
-                            "HS_Gen5_2",
-                            "BC_M_8"
+                        "notin": [
+                            "GP_S_Gen5",
+                            "Stretch",
+                            "DataWarehouse",
+                            "Premium",
+                            "Standard",
+                            "Free",
+                            "Basic",
+                            "System"
                         ]
                     }
                   ]
