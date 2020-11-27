@@ -1,0 +1,57 @@
+{
+    "type": "Microsoft.Authorization/policyDefinitions",
+    "name": "control-hybrid-use-benefit-sql-databses",
+    "properties": {
+        "displayName": "Control SQL Server Database License Type",
+        "description": "This policy controls SQL Database Licenses.",
+        "parameters": {
+            "allowedSQLServerLicenses": {
+                "type": "string",
+                "defaultVlaue": "",
+                "allowedValues": [
+                   "LicenseIncluded",
+                   "BasePrice"
+                ],
+                "metadata": {
+                    "description": "SQL Database license included or baseprice (hybrid use)",
+                    "displayName": "Audit license type"
+                }
+            },
+            "effect": {
+                "type": "string",
+                "defaultValue": "Deny",
+                "allowedValues": [
+                    "Audit",
+                    "Deny",
+                    "Disabled"
+                ],
+                "metadata": {
+                    "displayName": "Effect",
+                    "description": "The effect determines what happens when the policy rule is evaluated to match"
+                }
+            }
+        },
+        "policyRule": {
+            "if": {
+                "allOf": [
+                    {
+                        "field": "type",
+                        "In": [ 
+                          "Microsoft.Sql/servers/databases/licenseType",
+                          "Microsoft.Sql/servers/elasticpools/licenseType",
+                          "Microsoft.Sql/instancePools/licenseType",
+                          "Microsoft.Sql/managedInstances/licenseType"
+                        ]
+                    },
+                    {
+                        "field": "Microsoft.SqlVirtualMachine/SqlVirtualMachines/SqlServerLicenseType",
+                        "notIn": "[parameters('allowedSQLServerLicenses')]"
+                    }
+                ]
+            },
+            "then": {
+                "effect": "[parameters('effect')]"
+            }
+        }
+    }
+}
