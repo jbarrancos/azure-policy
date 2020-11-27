@@ -5,9 +5,9 @@
         "displayName": "Control SQL Server Database License Type",
         "description": "This policy controls SQL Database Licenses.",
         "parameters": {
-            "allowedSQLServerLicenses": {
+            "allowedSQLDatabaseLicense": {
                 "type": "string",
-                "defaultVlaue": "",
+                "defaultValue": "BasePrice",
                 "allowedValues": [
                    "LicenseIncluded",
                    "BasePrice"
@@ -45,7 +45,7 @@
                     },
                     {
                         "field": "Microsoft.SqlVirtualMachine/SqlVirtualMachines/SqlServerLicenseType",
-                        "notIn": "[parameters('allowedSQLServerLicenses')]"
+                        "notEquals": "[parameters('allowedSQLDatabaseLicense')]"
                     }
                 ]
             },
