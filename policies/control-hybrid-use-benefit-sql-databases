@@ -37,10 +37,10 @@
                     {
                         "field": "type",
                         "In": [ 
-                          "Microsoft.Sql/servers/databases/licenseType",
-                          "Microsoft.Sql/servers/elasticpools/licenseType",
-                          "Microsoft.Sql/instancePools/licenseType",
-                          "Microsoft.Sql/managedInstances/licenseType"
+                          "Microsoft.Sql/servers/databases",
+                          "Microsoft.Sql/servers/elasticpools",
+                          "Microsoft.Sql/instancePools",
+                          "Microsoft.Sql/managedInstances"
                         ]
                     },
                     {
