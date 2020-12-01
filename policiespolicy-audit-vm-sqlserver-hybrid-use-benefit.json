@@ -1,6 +1,6 @@
 {
     "type": "Microsoft.Authorization/policyDefinitions",
-    "name": "control-hybrid-use-benefit-sql-databses",
+    "name": "policy-audit-vm-sqlserver-hybrid-use-benefit",
     "properties": {
         "displayName": "Control SQL Server Database License Type",
         "description": "This policy controls SQL Database Licenses.",
