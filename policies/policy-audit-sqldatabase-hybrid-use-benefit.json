@@ -81,7 +81,7 @@
                     },
                     {
                         "field": "Microsoft.Sql/servers/databases/sku.name",
-                        "like": "GP_S_*"
+                        "notlike": "GP_S_*"
                     }
                   ]
                  },
