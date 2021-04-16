@@ -27,7 +27,7 @@
                         "equals": "Microsoft.Compute/virtualMachines"
                     },
                     {
-                        "anyOf": [
+                        "allOf": [
                             {
                                 "field": "Microsoft.Compute/imagePublisher",
                                 "in": [
